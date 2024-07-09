@@ -94,9 +94,6 @@ export default function BasicTableMotor() {
               <TableCell>{row.department}</TableCell>
               <TableCell>{row.status}</TableCell>
               <TableCell>{row.role}</TableCell>
-              <TableCell>
-                <button className="btn btn-danger invisible">Sil</button>
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>

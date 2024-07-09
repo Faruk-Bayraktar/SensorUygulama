@@ -23,9 +23,9 @@ const SidebarNavList: React.FC<props> = (props) => {
 
   const [isMenuExtended, setIsMenuExtended] = useState(false);
   const [isExpandable, setIsExpandable] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const handleMainMenuAction = (title: any) => {
+    console.log(title);
 
-  const handleMainMenuAction = () => {
     if (isExpandable) {
       toggleMenu();
       return;
@@ -52,7 +52,7 @@ const SidebarNavList: React.FC<props> = (props) => {
           <Link
             href={props.data?.path}
             className="nav-link"
-            onClick={handleMainMenuAction}
+            onClick={() => handleMainMenuAction(props.data?.id)}
             style={{ cursor: "pointer" }}
           >
             {icon} {titlesub}
@@ -61,7 +61,7 @@ const SidebarNavList: React.FC<props> = (props) => {
           <Link
             href={props.data?.path || ""}
             className="nav-link"
-            onClick={handleMainMenuAction}
+            onClick={() => handleMainMenuAction(props.data?.id)}
             style={{ cursor: "pointer" }}
           >
             {props.submenu === "active" ? (

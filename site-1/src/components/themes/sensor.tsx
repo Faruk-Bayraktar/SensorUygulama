@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import isVisible from "./sidebar/SidebarNavList";
 
 const rows = [
   {
@@ -94,9 +95,6 @@ export default function BasicTableSensor() {
               <TableCell>{row.department}</TableCell>
               <TableCell>{row.status}</TableCell>
               <TableCell>{row.role}</TableCell>
-              <TableCell>
-                <button className="btn btn-danger invisible">Sil</button>
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>
