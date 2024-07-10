@@ -117,11 +117,11 @@ const Sensorler = () => {
   //   }, []);
   // ---------------------------------------------------------
   return (
-    <PanelContent title="Sensör Ekle/Sil">
+    <PanelContent title="Sensör Ekle">
       <Card title="Sensör Ekle Sil">
         <div className="row">
           {rows.map((row) => (
-            <>
+            <React.Fragment key={row.id}>
               <div className="col-lg-3 col-6">
                 <div className="small-box bg-info">
                   <div className="inner">
@@ -160,7 +160,7 @@ const Sensorler = () => {
                   </div>
                 </div>
               </div>
-            </>
+            </React.Fragment>
           ))}
         </div>
       </Card>
