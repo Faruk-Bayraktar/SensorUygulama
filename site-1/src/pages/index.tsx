@@ -2,9 +2,19 @@ import { Card, PanelContent } from "@/components";
 import Link from "next/link";
 import { useTable } from "react-table";
 import React from "react";
-import { Table } from "@mui/material";
-import BasicTableMotor from "../components/themes/motor";
-import BasicTableSensor from "../components/themes/sensor";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import MotorTable from "@/components/themes/motor-table";
+import { motor_veri } from "@/components/themes/motor-veri";
+import { sensor_veri } from "@/components/themes/sensor-veri";
+import SensorTable from "@/components/themes/sensor-table";
 
 export default function Dashboard() {
   return (
@@ -73,19 +83,50 @@ export default function Dashboard() {
         <div className="col-12">
           <Card title="Motorlar">
             <div>
-              <BasicTableMotor />
+              <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>id</TableCell>
+                      <TableCell>Ad</TableCell>
+                      <TableCell>Tip</TableCell>
+                      <TableCell>Aciklama</TableCell>
+                      <TableCell>Acik_kapali</TableCell>
+                      <TableCell>Ayar_degeri</TableCell>
+                      <TableCell>Tarih</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <MotorTable items={motor_veri} />
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </div>
           </Card>
         </div>
         <div className="col-12">
           <Card title="Sensörler">
             <div>
-              <BasicTableSensor />
+              <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>id</TableCell>
+                      <TableCell>Ad</TableCell>
+                      <TableCell>Tip</TableCell>
+                      <TableCell>Aciklama</TableCell>
+                      <TableCell>Acik_kapali</TableCell>
+                      <TableCell>Ayar_degeri</TableCell>
+                      <TableCell>Tarih</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <SensorTable items={sensor_veri} />
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </div>
           </Card>
-        </div>
-        <div className="col-12">
-          <Card title="Users">Buraya En son kimin girip çıktığı yazılır</Card>
         </div>
       </div>
     </PanelContent>

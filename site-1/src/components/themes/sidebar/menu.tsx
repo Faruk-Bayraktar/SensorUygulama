@@ -25,26 +25,14 @@ const menu: Array<Menu> = [
   },
 
   {
-    path: "#",
     icon: "nav-icon fa fa-cogs",
     title: "Motorlar",
-    children: [
-      {
-        id: "sil",
-        path: "/motorlar",
-        title: "Motor Ekle/Sil",
-      },
-      {
-        id: "durdur",
-        path: "/motorlar",
-        title: "Motor Durdur/Çalıştır",
-      },
-    ],
+    path: "/motorlar",
   },
   {
     icon: "nav-icon fa fa-bolt",
     path: "/sensorler",
-    title: "Sensör Ekle/Sil",
+    title: "Sensörler",
   },
 ];
 
