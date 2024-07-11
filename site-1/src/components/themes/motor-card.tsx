@@ -8,7 +8,13 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import engine from "../../../assets/engine.json";
+import Slider from "./slider";
 //BURASI KARTLARI YAPICAGIMIZ YER
+const itemlar = [
+  { id: "1", ayar_değer: 20 },
+  { id: "2", ayar_değer: 50 },
+  // daha fazla item
+];
 
 function MotorCard({ items }: { items: any }) {
   const [menus, setMenus] = useState<{ [key: number]: boolean }>({});
@@ -51,38 +57,28 @@ function MotorCard({ items }: { items: any }) {
     newActiveRows[index] = !newActiveRows[index];
     setActiveRows(newActiveRows);
   };
-  const [doluluk, setDoluluk] = useState(items);
+  const Component = ({ items }: any) => {
+    // Her bir item için ayrı bir range değeri tutacak state
+    const [rangeValues, setRangeValues] = useState({});
 
-  const handleDolulukChange = (id: any, newDoluluk: any) => {
-    setDoluluk(
-      items.map((item: any) =>
-        item.id === id ? { ...item, doluluk: newDoluluk } : item
-      )
-    );
+    // Range değerini güncelleyen fonksiyon
+    const handleRangeChange = (id: any, value: any) => {
+      setRangeValues((prev) => ({ ...prev, [id]: value }));
+    };
   };
   return items.map((item: any) => (
     <div className="col-lg-3 col-6" key={item.id}>
       <div className="small-box bg-info">
         <div className="inner">
           <div className="row d-flex align-items-center">
-            <Lottie
-              loop={activeRows[item.id] ? false : true}
-              animationData={engine}
-              className="col-lg-3 col-6"
-            />
-            <div style={{ borderRadius: "5px", height: "2em" }}>
-              <input
-                className="col-lg-9 p-0"
-                type="range"
-                value={item.doluluk}
-                min={0}
-                max={100}
-                step={1}
-                onChange={(e) =>
-                  handleDolulukChange(item.id, parseInt(e.target.value))
-                }
+            <div className="col-lg-3 col-12">
+              <Lottie
+                loop={activeRows[item.id] ? false : true}
+                animationData={engine}
               />
-              <h1>{item.doluluk}</h1>
+            </div>
+            <div className="col-lg-9 col-6">
+              <Slider {...item} />
             </div>
           </div>
           <div className="row d-flex justify-content-around">
@@ -99,8 +95,6 @@ function MotorCard({ items }: { items: any }) {
                 onClick={() => handleClick(item.id)}
                 style={{ width: "5em" }}
               >
-                {/* {durdur ? "Çalıştır" : "Durdur"}
-                 */}
                 {activeRows[item.id] ? "Çalıştır" : "Durdur"}
               </button>
             </div>

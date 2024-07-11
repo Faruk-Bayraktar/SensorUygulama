@@ -23,29 +23,13 @@ export default function Dashboard() {
         <div className="col-lg-3 col-6">
           <div className="small-box bg-info">
             <div className="inner">
-              <h3>150</h3>
+              <h3>{motor_veri.length}</h3>
               <p>Çalışan Motorlar</p>
             </div>
             <div className="icon">
               <i className="ion ion-bag" />
             </div>
-            <Link href="/" className="small-box-footer">
-              More info <i className="fas fa-arrow-circle-right" />
-            </Link>
-          </div>
-        </div>
-        <div className="col-lg-3 col-6">
-          <div className="small-box bg-success">
-            <div className="inner">
-              <h3>
-                53<sup style={{ fontSize: "20px" }}>%</sup>
-              </h3>
-              <p>Çalışan Sensörler</p>
-            </div>
-            <div className="icon">
-              <i className="ion ion-stats-bars" />
-            </div>
-            <Link href="/" className="small-box-footer">
+            <Link href="/motorlar" className="small-box-footer">
               More info <i className="fas fa-arrow-circle-right" />
             </Link>
           </div>
@@ -54,13 +38,13 @@ export default function Dashboard() {
         <div className="col-lg-3 col-6">
           <div className="small-box bg-warning">
             <div className="inner">
-              <h3>44</h3>
-              <p>Kullanıcı Sayısı</p>
+              <h3>{sensor_veri.length}</h3>
+              <p>Sensörler</p>
             </div>
             <div className="icon">
               <i className="ion ion-person-add" />
             </div>
-            <Link href="/" className="small-box-footer">
+            <Link href="/sensorler" className="small-box-footer">
               More info <i className="fas fa-arrow-circle-right" />
             </Link>
           </div>
@@ -75,7 +59,7 @@ export default function Dashboard() {
             <div className="icon">
               <i className="ion ion-pie-graph" />
             </div>
-            <Link href="/" className="small-box-footer">
+            <Link href="/motorlar" className="small-box-footer">
               More info <i className="fas fa-arrow-circle-right" />
             </Link>
           </div>

@@ -15,7 +15,7 @@ function MotorTable({ items }: { items: any }) {
       <TableCell>{item.ad}</TableCell>
       <TableCell>{item.tip}</TableCell>
       <TableCell>{item.aciklama}</TableCell>
-      <TableCell>{item.acik_kapali}</TableCell>
+      <TableCell>{item.acik_kapali ? "Açık" : "Kapalı"}</TableCell>
       <TableCell>{item.ayar_degeri}</TableCell>
       <TableCell>{item.tarih}</TableCell>
     </TableRow>
