@@ -64,6 +64,24 @@ const motor_veri = [
     ayar_degeri: 78,
     tarih: "17.03.2021",
   },
+  {
+    id: 8,
+    ad: "Monitör Fanı",
+    tip: "Fan",
+    aciklama: "Monitörün soğutulması için kullanılan",
+    acik_kapali: true,
+    ayar_degeri: 78,
+    tarih: "17.03.2021",
+  },
+  {
+    id: 9,
+    ad: "Monitör Fanı",
+    tip: "Fan",
+    aciklama: "Monitörün soğutulması için kullanılan",
+    acik_kapali: true,
+    ayar_degeri: 78,
+    tarih: "17.03.2021",
+  },
 
   // Add more rows as needed
 ];
