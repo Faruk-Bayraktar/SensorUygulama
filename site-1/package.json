@@ -16,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/material": "^5.16.0",
+    "@types/css-modules": "^1.0.5",
     "lottie-react": "^2.4.0",
     "next": "^14.2.3",
     "react": "18.2.0",

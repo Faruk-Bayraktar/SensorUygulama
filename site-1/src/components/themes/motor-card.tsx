@@ -1,27 +1,15 @@
-import {
-  faSliders,
-  faTrash,
-  faWrench,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faWrench } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import engine from "../../../assets/engine.json";
-import Slider from "./slider";
-//BURASI KARTLARI YAPICAGIMIZ YER
-const itemlar = [
-  { id: "1", ayar_değer: 20 },
-  { id: "2", ayar_değer: 50 },
-  // daha fazla item
-];
 
 function MotorCard({ items }: { items: any }) {
   const [menus, setMenus] = useState<{ [key: number]: boolean }>({});
   const menuRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
   const toggleMenu = (id: number) => {
-    // setMenu(!menu);
     setMenus((prevMenus) => ({
       ...prevMenus,
       [id]: !prevMenus[id],
@@ -43,7 +31,6 @@ function MotorCard({ items }: { items: any }) {
       }
     }
   };
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -57,15 +44,7 @@ function MotorCard({ items }: { items: any }) {
     newActiveRows[index] = !newActiveRows[index];
     setActiveRows(newActiveRows);
   };
-  const Component = ({ items }: any) => {
-    // Her bir item için ayrı bir range değeri tutacak state
-    const [rangeValues, setRangeValues] = useState({});
 
-    // Range değerini güncelleyen fonksiyon
-    const handleRangeChange = (id: any, value: any) => {
-      setRangeValues((prev) => ({ ...prev, [id]: value }));
-    };
-  };
   return items.map((item: any) => (
     <div className="col-lg-3 col-6" key={item.id}>
       <div className="small-box bg-info">
@@ -78,7 +57,7 @@ function MotorCard({ items }: { items: any }) {
               />
             </div>
             <div className="col-lg-9 col-6">
-              <Slider {...item} />
+              <p>Burada input range olması gerek</p>
             </div>
           </div>
           <div className="row d-flex justify-content-around">

@@ -535,6 +535,11 @@
     "@swc/counter" "^0.1.3"
     tslib "^2.4.0"
 
+"@types/css-modules@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/@types/css-modules/-/css-modules-1.0.5.tgz"
+  integrity sha512-oeKafs/df9lwOvtfiXVliZsocFVOexK9PZtLQWuPeuVCFR7jwiqlg60lu80JTe5NFNtH3tnV6Fs/ySR8BUPHAw==
+
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
