@@ -7,7 +7,6 @@ const sensor_veri = [
     tip: "Fan",
     aciklama: "Odayı serinletmesi için kullanılan",
     acik_kapali: false,
-    ayar_degeri: 62,
     tarih: "17.03.2021",
   },
   {
@@ -16,7 +15,6 @@ const sensor_veri = [
     tip: "Fan",
     aciklama: "Motorun soğutulması için kullanılan",
     acik_kapali: true,
-    ayar_degeri: 25,
     tarih: "17.03.2021",
   },
   {
@@ -25,7 +23,6 @@ const sensor_veri = [
     tip: "Fan",
     aciklama: "Fanın çalışması için kullanılan",
     acik_kapali: true,
-    ayar_degeri: 69,
     tarih: "17.03.2021",
   },
   {
@@ -34,7 +31,6 @@ const sensor_veri = [
     tip: "Motor",
     aciklama: "Sıcaklık ayarlamak için kullanılan",
     acik_kapali: true,
-    ayar_degeri: 87,
     tarih: "17.03.2021",
   },
   {
@@ -43,7 +39,6 @@ const sensor_veri = [
     tip: "Motor",
     aciklama: "Bitkileri sulamak için kullanılan",
     acik_kapali: false,
-    ayar_degeri: 56,
     tarih: "17.03.2021",
   },
   {
@@ -52,7 +47,6 @@ const sensor_veri = [
     tip: "Motor",
     aciklama: "Hava akışını sağlamak için kullanılan",
     acik_kapali: true,
-    ayar_degeri: 45,
     tarih: "17.03.2021",
   },
   {
@@ -61,7 +55,6 @@ const sensor_veri = [
     tip: "Fan",
     aciklama: "Monitörün soğutulması için kullanılan",
     acik_kapali: true,
-    ayar_degeri: 78,
     tarih: "17.03.2021",
   },
   {
@@ -70,7 +63,6 @@ const sensor_veri = [
     tip: "Fan",
     aciklama: "Kasa soğutulması için kullanılan",
     acik_kapali: false,
-    ayar_degeri: 78,
     tarih: "17.03.2021",
   },
 
