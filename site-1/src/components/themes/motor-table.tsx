@@ -1,12 +1,4 @@
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { TableCell, TableRow } from "@mui/material";
 import React from "react";
 function MotorTable({ items }: { items: any }) {
   return items.map((item: any) => (

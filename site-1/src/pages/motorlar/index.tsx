@@ -1,25 +1,19 @@
 import { Card, PanelContent } from "@/components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MotorCard from "@/components/themes/motor-card";
-import { motor_veri } from "@/components/themes/motor-veri";
 import MotorAddPopup from "@/components/themes/motor-add-popup";
+interface Motor {
+  ad: string;
+  tip: number;
+  aciklama: string;
+  acik_kapali: boolean;
+  ayar_degeri: number;
+  tarih: string;
+}
 
 const Motorlar = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [motors, setMotors] = useState(motor_veri);
-
-  const handleAddMotor = (newMotor: {
-    id: number;
-    ad: string;
-    tip: string;
-    aciklama: string;
-    acik_kapali: boolean;
-    ayar_degeri: number;
-    tarih: string;
-  }) => {
-    setMotors((prev) => [...prev, newMotor]);
-  };
-
+  const [motors, setMotors] = useState<Motor[]>([]);
   const handleOpenPopup = () => {
     setIsPopupVisible(true);
   };
@@ -27,6 +21,26 @@ const Motorlar = () => {
   const handleClosePopup = () => {
     setIsPopupVisible(false);
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("/api/motors", {
+          method: "GET",
+        });
+        const result = await response.json();
+
+        if (response.ok) {
+          setMotors(result.data);
+        } else {
+          console.error("Failed to fetch motors:", result.message);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <PanelContent title="Motor">
@@ -40,13 +54,12 @@ const Motorlar = () => {
         <div className="row">
           <MotorCard items={motors} />
         </div>
-        <div>
+        {isPopupVisible && (
           <MotorAddPopup
             isVisible={isPopupVisible}
             onClose={handleClosePopup}
-            onAdd={handleAddMotor}
           />
-        </div>
+        )}
       </Card>
     </PanelContent>
   );

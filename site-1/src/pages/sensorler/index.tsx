@@ -1,24 +1,17 @@
 import { Card, PanelContent } from "@/components";
 import SensorCard from "@/components/themes/sensor-card";
 import React, { useState, useEffect, useRef } from "react";
-import { sensor_veri } from "@/components/themes/sensor-veri";
 import SensorAddPopup from "@/components/themes/sensonr-add-popup";
 
+interface Sensor {
+  ad: string;
+  tip: number;
+  aciklama: string;
+  tarih: string;
+}
 const Sensorler = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [sensors, setSensor] = useState(sensor_veri);
-
-  const handleAddSensor = (newSensor: {
-    id: number;
-    ad: string;
-    tip: string;
-    aciklama: string;
-    acik_kapali: boolean;
-    tarih: string;
-  }) => {
-    setSensor((prev) => [...prev, newSensor]);
-  };
-
+  const [sensors, setSensors] = useState<Sensor[]>([]);
   const handleOpenPopup = () => {
     setIsPopupVisible(true);
   };
@@ -27,6 +20,23 @@ const Sensorler = () => {
     setIsPopupVisible(false);
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("/api/sensor");
+        const result = await response.json();
+
+        if (response.ok) {
+          setSensors(result.data);
+        } else {
+          console.error("Failed to fetch sensors:", result.message);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <PanelContent title="Sensör">
       <Card title="Sensörler">
@@ -39,13 +49,12 @@ const Sensorler = () => {
         <div className="row">
           <SensorCard items={sensors} />
         </div>
-        <div>
+        {isPopupVisible && (
           <SensorAddPopup
             isVisible={isPopupVisible}
             onClose={handleClosePopup}
-            onAdd={handleAddSensor}
           />
-        </div>
+        )}
       </Card>
     </PanelContent>
   );

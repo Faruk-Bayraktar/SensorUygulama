@@ -26,8 +26,7 @@ const Header = (props: any) => {
             onClick={handleToggleMenuSidebar}
             data-widget="pushmenu"
             aria-label="Menu Hide Bar"
-            role="button"
-          >
+            role="button">
             <i className="fas fa-bars" />
           </span>
         </li>
@@ -38,29 +37,25 @@ const Header = (props: any) => {
           <div className="nav-item dropdown" onMouseEnter={toggleMenu}>
             <div className="nav-link dropdown-toggle user-action">
               <img
-                src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg"
+                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                 className="avatarProfile"
                 alt="Avatar"
               />{" "}
-              Sam <b className="caret"></b>
+              <b className="caret"></b>
             </div>
             <div
               className={`dropdown-menu ${menu ? "show" : ""}`}
-              onMouseLeave={() => setMenu(false)}
-            >
-              <button type="button" className="dropdown-item">
-                <a href="/profile">
-                  <i className="fa fa-user"></i> Profile
-                </a>
-              </button>
+              onMouseLeave={() => setMenu(false)}>
+              {/* <button type="button" className="dropdown-item">
+                <i className="fa fa-user"></i> Profile
+              </button> */}
               <button
                 type="button"
                 className="dropdown-item"
                 onClick={() => {
                   props.router.push("/login");
                   removeItem("userdata");
-                }}
-              >
+                }}>
                 <i className="nav-icon fas fa-arrow-right-from-bracket"></i>{" "}
                 Logout
               </button>

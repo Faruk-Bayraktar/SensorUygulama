@@ -2,7 +2,7 @@ import {
   RecoilEnv,
   useRecoilState,
   useRecoilValue,
-  useSetRecoilState
+  useSetRecoilState,
 } from "recoil";
 
 const Footer = lazy(() => import("./footer"));
@@ -17,7 +17,7 @@ import {
   calculateWindowSize,
   getItem,
   removeWindowClass,
-  useWindowSize
+  useWindowSize,
 } from "../utils/function";
 import { Suspense, lazy, useEffect, useState } from "react";
 import { withRouter } from "next/router";
@@ -31,7 +31,7 @@ const Layout = ({ children, router }: any) => {
 
   const handleToggleMenuSidebar = () => {
     setHideSidebar({
-      menuSidebarCollapsed: !valueHideSidebar.menuSidebarCollapsed
+      menuSidebarCollapsed: !valueHideSidebar.menuSidebarCollapsed,
     });
   };
 
@@ -40,7 +40,7 @@ const Layout = ({ children, router }: any) => {
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    if (getItem("userdata").token === undefined) {
+    if (getItem("userdata").loggedIn === undefined) {
       router.push("/login");
     }
     removeWindowClass("sidebar-closed");

@@ -4,79 +4,111 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { withRouter } from "next/router";
+import { useRouter } from "next/router";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const defaultValue = {
   username: "",
-  password: ""
+  password: "",
 };
 
 const Login = (props: any) => {
+  const router = useRouter();
+
   const setTheme = useSetRecoilState(themesSetting);
   useEffect(() => {
-    if (getItem("userdata").token !== undefined) {
+    if (getItem("userdata").loggedIn !== undefined) {
       props.router.push("/dashboard");
     }
     setTheme({
       header: false,
       sidebar: false,
       footer: false,
-      content: true
+      content: true,
     });
     return () => {
       setTheme({
         header: true,
         sidebar: true,
         footer: true,
-        content: true
+        content: true,
       });
     };
   }, [props.router, setTheme]);
+
   const {
-    handleSubmit,
     register,
-    formState: { errors, isDirty, isValid }
+    formState: { errors, isDirty, isValid },
   } = useForm({
     mode: "onChange",
-    defaultValues: defaultValue
+    defaultValues: defaultValue,
   });
+
+  const [eposta, epostaDegistir] = useState("");
+  const [sifre, sifreDegistir] = useState("");
   const [password, setPassword] = useState(true);
 
-  const onSubmit = async (data: any) => {
-    props.router.push("/dashboard");
-    setItem("userdata", {
-      userid: "sam",
-      username: "Samsul Arifin",
-      token: 12341212
-    });
+  function handleEPostaChange(e: any) {
+    epostaDegistir(e.target.value);
+  }
+
+  function handleSifreChange(e: any) {
+    sifreDegistir(e.target.value);
+  }
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
+    const varmiURL = `http://localhost:3000/api/kullanici/?eposta=${eposta}&sifre=${sifre}`;
+
+    try {
+      var resp = await fetch(varmiURL);
+      if (resp.status === 200) {
+        props.router.push("/dashboard");
+        setItem("userdata", {
+          loggedIn: true,
+        });
+        console.log("girildi");
+      } else {
+        toast.error("Yanlış kullanıcı adı veya şifre");
+      }
+    } catch (error) {
+      console.log("Hata : " + error);
+      toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
+    }
   };
 
   return (
     <div className="login-box container" style={{ marginTop: "10%" }}>
+      <ToastContainer />
       <div className="card card-outline card-primary">
         <div className="card-header text-center">
           <div className="h1">
-            <b>ADMIN LTE </b>APP
+            <b>SENSOR </b>APP
           </div>
         </div>
         <div className="card-body">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit}>
             <p className="login-box-msg">Sign in to start your session</p>
             <InputField
               label="Username"
               name="username"
               type="text"
-              register={register("username")}
+              onChange={handleEPostaChange}
+              placeholder="Username"
+              value={eposta}
               iconFormGroup="fas fa-envelope"
               formGroup
-              errors={errors?.username}
-              placeholder="Silahkan Masukan Userid"
             />
             <InputField
               label="Password"
               name="password"
               type="text"
+              value={sifre}
+              onChange={handleSifreChange}
               register={register("password")}
-              placeholder="Silahkan Masukan Password"
+              placeholder="Password"
               iconFormGroup={password ? "fas fa-eye-slash" : "fas fa-eye"}
               customeCss={password ? "password-hide-css" : ""}
               btnAction={() => setPassword(!password)}

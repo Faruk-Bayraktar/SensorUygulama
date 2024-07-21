@@ -1,33 +1,20 @@
-import engine from "../../../assets/engine.json";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./motorPop.module.css";
 import Lottie from "lottie-react";
-import { sensor_veri } from "./sensor-veri";
-
+import engine from "../../../assets/engine.json";
 interface SensorAddPopupProps {
   isVisible: boolean;
   onClose: () => void;
-  onAdd: (newSensor: {
-    id: number;
-    ad: string;
-    tip: string;
-    aciklama: string;
-    acik_kapali: boolean;
-    tarih: string;
-  }) => void;
 }
 
 const SensorAddPopup: React.FC<SensorAddPopupProps> = ({
   isVisible,
   onClose,
-  onAdd,
 }) => {
   const [formData, setFormData] = useState({
-    id: sensor_veri.length + 1, // Assign the next available ID
     ad: "",
-    tip: "",
+    tip: 0,
     aciklama: "",
-    acik_kapali: false,
     tarih: new Date().toISOString(),
   });
 
@@ -43,9 +30,28 @@ const SensorAddPopup: React.FC<SensorAddPopupProps> = ({
     }));
   };
 
-  const handleSubmit = () => {
-    onAdd(formData);
-    onClose();
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("/api/add_sensor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Sensor added successfully:", result);
+        onClose();
+        window.location.reload();
+      } else {
+        const result = await response.json();
+        console.error("Failed to add Sensor:", result.message);
+      }
+    } catch (error) {
+      console.error("Error adding Sensor:", error);
+    }
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -87,7 +93,7 @@ const SensorAddPopup: React.FC<SensorAddPopupProps> = ({
                 <Lottie loop={true} animationData={engine} />
               </div>
               <div className="col-lg-9 col-12">
-                <h4 className="text-center">Sensör Ekle</h4>
+                <h4 className="text-center">Sensor Ekle</h4>
               </div>
             </div>
             <div className="row d-flex justify-content-around">
@@ -101,7 +107,7 @@ const SensorAddPopup: React.FC<SensorAddPopupProps> = ({
                   className="mb-2"
                 />
                 <input
-                  type="text"
+                  type="number"
                   name="tip"
                   placeholder="Tipini Giriniz"
                   value={formData.tip}
@@ -115,7 +121,6 @@ const SensorAddPopup: React.FC<SensorAddPopupProps> = ({
                   onChange={handleChange}
                   className="mb-2"
                 />
-
                 <button className="mb-2 btn btn-success" onClick={handleSubmit}>
                   Ekle
                 </button>

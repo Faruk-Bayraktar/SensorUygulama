@@ -1,32 +1,19 @@
-import engine from "../../../assets/engine.json";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./motorPop.module.css";
 import Lottie from "lottie-react";
-import { motor_veri } from "./motor-veri";
-
+import engine from "../../../assets/engine.json";
 interface MotorAddPopupProps {
   isVisible: boolean;
   onClose: () => void;
-  onAdd: (newMotor: {
-    id: number;
-    ad: string;
-    tip: string;
-    aciklama: string;
-    acik_kapali: boolean;
-    ayar_degeri: number;
-    tarih: string;
-  }) => void;
 }
 
 const MotorAddPopup: React.FC<MotorAddPopupProps> = ({
   isVisible,
   onClose,
-  onAdd,
 }) => {
   const [formData, setFormData] = useState({
-    id: motor_veri.length + 1, // Assign the next available ID
     ad: "",
-    tip: "",
+    tip: 0,
     aciklama: "",
     acik_kapali: false,
     ayar_degeri: 0,
@@ -45,9 +32,28 @@ const MotorAddPopup: React.FC<MotorAddPopupProps> = ({
     }));
   };
 
-  const handleSubmit = () => {
-    onAdd(formData);
-    onClose();
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("/api/add_motor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Motor added successfully:", result);
+        onClose();
+        window.location.reload();
+      } else {
+        const result = await response.json();
+        console.error("Failed to add motor:", result.message);
+      }
+    } catch (error) {
+      console.error("Error adding motor:", error);
+    }
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -103,7 +109,7 @@ const MotorAddPopup: React.FC<MotorAddPopupProps> = ({
                   className="mb-2"
                 />
                 <input
-                  type="text"
+                  type="number"
                   name="tip"
                   placeholder="Tipini Giriniz"
                   value={formData.tip}

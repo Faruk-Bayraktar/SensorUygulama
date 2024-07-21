@@ -8,6 +8,7 @@ import engine from "../../../assets/engine.json";
 function MotorCard({ items }: { items: any }) {
   const [menus, setMenus] = useState<{ [key: number]: boolean }>({});
   const menuRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
+  const [activeRows, setActiveRows] = useState(items.map(() => false));
 
   const toggleMenu = (id: number) => {
     setMenus((prevMenus) => ({
@@ -37,7 +38,6 @@ function MotorCard({ items }: { items: any }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const [activeRows, setActiveRows] = useState(items.map(() => false));
 
   const handleClick = (index: any) => {
     const newActiveRows = [...activeRows];
@@ -45,6 +45,24 @@ function MotorCard({ items }: { items: any }) {
     setActiveRows(newActiveRows);
   };
 
+  const deleteItem = async (id: any) => {
+    try {
+      const response = await fetch(`/api/delete_motor`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        console.error("Failed to delete the item");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return items.map((item: any) => (
     <div className="col-lg-3 col-6" key={item.id}>
       <div className="small-box bg-info">
@@ -62,7 +80,7 @@ function MotorCard({ items }: { items: any }) {
           </div>
           <div className="row d-flex justify-content-around">
             <div className="d-flex flex-column ">
-              <h3>150</h3>
+              <h3>{item.id}</h3>
               <p>{item.ad}</p>
               <p>{item.aciklama}</p>
             </div>
@@ -101,7 +119,11 @@ function MotorCard({ items }: { items: any }) {
                 transform: "translateX(-40%)",
               }}
             >
-              <button type="button" className="dropdown-item">
+              <button
+                onClick={() => deleteItem(item.id)}
+                type="button"
+                className="dropdown-item"
+              >
                 <FontAwesomeIcon
                   style={{ marginRight: "0.5em", color: "red" }}
                   icon={faTrash}

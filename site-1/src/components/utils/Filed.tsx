@@ -78,6 +78,7 @@ const InputField = React.forwardRef((props: IFieldTextProps, ref: any) => {
         <input
           {...props.register}
           type={props.type}
+          onChange={props.onChange}
           readOnly={props.readOnly}
           placeholder={props.placeholder}
           style={{ textTransform: props.uppercase ? "uppercase" : "none" }}
@@ -90,8 +91,7 @@ const InputField = React.forwardRef((props: IFieldTextProps, ref: any) => {
             <span
               style={{ cursor: "pointer" }}
               onClick={props.btnAction}
-              className="input-group-text"
-            >
+              className="input-group-text">
               <span className={props.iconFormGroup} />
             </span>
           </div>

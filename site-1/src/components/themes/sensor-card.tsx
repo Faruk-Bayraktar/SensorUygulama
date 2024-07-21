@@ -31,10 +31,6 @@ function SensorCard({ items }: { items: any }) {
       }
     }
   };
-  // const handleClick = () => {
-  //   setDurdur(!durdur);
-  // };
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -48,10 +44,24 @@ function SensorCard({ items }: { items: any }) {
     newActiveRows[index] = !newActiveRows[index];
     setActiveRows(newActiveRows);
   };
-  // const [doluluk, setDoluluk] = useState(0);
-  // const handleMinChange = (event: any) => {
-  //   event.preventDefault();
-  // };
+  const deleteItem = async (id: any) => {
+    try {
+      const response = await fetch(`/api/delete_sensor`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        console.error("Failed to delete the item");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return items.map((item: any) => (
     <div className="col-lg-3 col-6">
@@ -85,9 +95,13 @@ function SensorCard({ items }: { items: any }) {
                 transform: "translateX(-50%)",
               }}
             >
-              <button type="button" className="dropdown-item">
+              <button
+                onClick={() => deleteItem(item.id)}
+                type="button"
+                className="dropdown-item"
+              >
                 <FontAwesomeIcon
-                  style={{ marginRight: "0.7em", color: "red" }}
+                  style={{ marginRight: "0.5em", color: "red" }}
                   icon={faTrash}
                 />
                 Sil

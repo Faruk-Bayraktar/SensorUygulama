@@ -21,9 +21,8 @@ const Button: React.FC<props> = (props) => {
     <button
       type={type}
       onClick={onClick}
-      disabled={disabled || loading.button}
-      className={`btn btn-${color} ${block === undefined ? "" : "btn-block"}`}
-    >
+      //disabled={disabled || loading.button}
+      className={`btn btn-${color} ${block === undefined ? "" : "btn-block"}`}>
       {loading.button ? (
         loading ? (
           <>
