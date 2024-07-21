@@ -100,3 +100,16 @@ export async function delete_sensors(id: any) {
     if (conn) conn.end();
   }
 }
+export async function update_motor_ayar_degeri(ayar_degeri: any, id: any) {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const querySql = "UPDATE motorlar SET ayar_degeri = ? WHERE id = ?";
+    await conn.query(querySql, [ayar_degeri, id]);
+  } catch (err) {
+    console.error("Database error:", err);
+    throw err;
+  } finally {
+    if (conn) conn.end();
+  }
+}

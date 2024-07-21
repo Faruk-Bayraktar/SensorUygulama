@@ -135,8 +135,6 @@ export default function Dashboard() {
                       <TableCell>Ad</TableCell>
                       <TableCell>Tip</TableCell>
                       <TableCell>Aciklama</TableCell>
-                      <TableCell>Acik_kapali</TableCell>
-                      <TableCell>Ayar_degeri</TableCell>
                       <TableCell>Tarih</TableCell>
                     </TableRow>
                   </TableHead>
